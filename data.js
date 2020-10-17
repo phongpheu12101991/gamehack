@@ -1,3 +1,4 @@
+let nowplayer = Number(localStorage.getItem("nowplayer"));
 let character = [
   {
     id: 0,
@@ -17,7 +18,7 @@ let character = [
 
 let screendata = [
   {
-    question: `Bạn vừa mua 1 cái bảng tên cho ngôi nhà, viết lên nó nào!<br> Tạo 1 biến tên houseName, gán giá trị là tên bạn cho nó.<br>var <input id='input1'/> 
+    question: `${character[nowplayer].name} vừa mua 1 cái bảng tên cho ngôi nhà, viết lên nó nào!<br> Tạo 1 biến tên houseName, gán giá trị là tên bạn cho nó.<br>var <input id='input1'/> 
     =  "<input id='input2'/>";`,
     input1: "houseName",
     input2: "Volvo",
@@ -60,6 +61,50 @@ let screendata = [
     divanswer: "divanswer4",
     ins: 3,
     answer: "Tôi 15 tuổi",
+  },
+  {
+    question: `Trong cùng 1 dòng code, khai báo 3 biến với tên và giá trị sau:<br>firstName = "Nguyễn"<br>lastName = "${character[nowplayer].name}"<br>
+    age = 15<br>var <input id='input1'/> = "Nguyễn"<input id='input2'/> lastName = "<input id='input3'/> <input id='input4'/> = <input id='input5'/>;`,
+    input1: "firstName",
+    input2: ";",
+    input3: `Phong";`,
+    input4: "age",
+    input5: "15",
+    tutorial: "https://www.w3schools.com/js/js_variables.asp",
+    bg: "house.jpg",
+    divanswer: "divanswer5",
+    ins: 5,
+    answer: `Nguyễn ${character[nowplayer].name} - 15 tuổi`,
+  },
+  {
+    question: `Sử dụng comments để mô tả kiểu dữ liệu của những biến sau:<br>
+    var yearsOld = 15;    //<input id='input1'/><br>
+    var lastName = "${character[nowplayer].name}";    //<input id='input2'/><br>
+    var x = {<br>
+    firstName: "Nguyễn",<br>
+  lastName: "${character[nowplayer].name}",<br>
+};    //<input id='input3'/>`,
+    input1: "number",
+    input2: "string",
+    input3: `object`,
+    tutorial: "https://www.w3schools.com/js/js_datatypes.asp",
+    bg: "house.jpg",
+    divanswer: "divanswer6",
+    ins: 3,
+    answer: `Rời khỏi...`,
+  },
+  {
+    question: `Sử dụng length property để alert độ dài của tên quán cafe:<br>
+    var cafeName = "MindX Cafe";<br>
+    var x = <input id='input1'/>;<br>
+    alert(x);`,
+    input1: "cafeName.length",
+    tutorial: "https://www.w3schools.com/js/js_strings.asp",
+    bg: "cafe.png",
+    divanswer: "divanswer7",
+    ins: 1,
+    answer: `10 !!`,
+    dialognpc: 'Tên quán của chúng tôi có bao nhiêu kí tự?'
   },
 ];
 
