@@ -1,6 +1,6 @@
 import { character, screendata, maparea } from "./data.js";
 
-localStorage.setItem("nowscene", 6);
+localStorage.setItem("nowscene", 13);
 localStorage.setItem("nowplayer", 0);
 
 let scenescreen = document.getElementById("scenescreen");
@@ -19,8 +19,10 @@ function changescene() {
   //   screendata[4].
   if (nowscene !== null) {
     scenescreen.style.backgroundImage = `url(${screendata[nowscene].bg})`;
-    codequestion.innerHTML = `${screendata[nowscene].question}`;
-    moreinfor.innerHTML = `Tutorials : ${screendata[nowscene].tutorial}`;
+
+    if (nowscene >= 13 && nowscene < 23) { scenescreen.innerHTML = scenescreen.innerHTML + `<img src="teacher.png" alt="" id="teacher">`}
+      codequestion.innerHTML = `${screendata[nowscene].question}`;
+    moreinfor.innerHTML = `Tutorials : <a href="${screendata[nowscene].tutorial}">${screendata[nowscene].tutorial}</a>`;
     let box = `<div id="${screendata[nowscene].divanswer}"></div>`;
 
     scenescreen.innerHTML = scenescreen.innerHTML + `${box}`;
@@ -31,6 +33,10 @@ function changescene() {
     }
     if (screendata[nowscene].dialognpc !== null) {
       document.getElementById(`npc`).style.visibility = "visible";
+      document.getElementById(`npc`).innerHTML = screendata[nowscene].dialognpc;
+      document.getElementById(
+        `${screendata[nowscene].divanswer}`
+      ).style.visibility = "hidden";
     }
     let input1 = document.getElementById("input1");
 
@@ -66,7 +72,7 @@ let submit = document.getElementById("submit");
 submit.addEventListener("click", checkanswer);
 
 function checkanswer() {
-  console.log(screendata[nowscene].divanswer);
+  //   console.log(screendata[nowscene].divanswer);
   let check = false;
   if (screendata[nowscene].ins == 1) {
     if (input1.value == screendata[nowscene].input1) {
@@ -120,11 +126,34 @@ function checkanswer() {
         });
       character[nowplayer].completed.push("house");
     }
-    document.getElementById(
-      `${screendata[nowscene].divanswer}`
-    ).innerHTML = `${screendata[nowscene].answer}`;
-    localStorage.setItem("nowscene", nowscene + 1);
-    changescene();
+    if (screendata[nowscene].dialognpc !== null) {
+      document.getElementById(
+        `${screendata[nowscene].divanswer}`
+      ).style.visibility = "visible";
+      document.getElementById(
+        `${screendata[nowscene].divanswer}`
+      ).innerHTML = `${screendata[nowscene].answer}`;
+      setTimeout(() => {
+        console.log(nowscene);
+        if (nowscene == 12) {
+          character[nowplayer].completed.push("cafe");
+          location.href = "map.html";
+        } else {
+          document.getElementById(
+            `${screendata[nowscene].divanswer}`
+          ).style.visibility = "hidden";
+          localStorage.setItem("nowscene", nowscene + 1);
+
+          changescene();
+        }
+      }, 1000);
+    } else {
+      document.getElementById(
+        `${screendata[nowscene].divanswer}`
+      ).innerHTML = `${screendata[nowscene].answer}`;
+      localStorage.setItem("nowscene", nowscene + 1);
+      changescene();
+    }
   }
 }
 

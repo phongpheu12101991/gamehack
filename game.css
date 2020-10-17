@@ -196,25 +196,269 @@ input {
   background-image: url("dialog.png");
   background-size: 100% 100%;
   width: 30%;
-  height: 10%;
-  line-height: 6vh;
-  font-size: 3vh;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 4vh;
   font-style: oblique;
   top: 50%;
   left: 30%;
   visibility: hidden;
+  font-weight: bolder;
 }
 
 #npc {
   position: absolute;
+  background-image: url("dialog-r.png");
+  background-size: 100% 100%;
+  width: 70%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 30%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 5%;
+}
+
+#divanswer8 {
+  position: absolute;
   background-image: url("dialog.png");
   background-size: 100% 100%;
-  width: 30%;
-  height: 10%;
-  line-height: 6vh;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
   font-size: 3vh;
   font-style: oblique;
   top: 50%;
   left: 30%;
   visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer9 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer10 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+
+#divanswer11 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+
+#divanswer12 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+
+#divanswer13 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+
+#divanswer14 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer15 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer16 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 4vh;
+}
+#divanswer17 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer18 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 4vh;
+}
+#divanswer19 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 4vh;
+}
+#divanswer20 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 4vh;
+}
+#divanswer21 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer22 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 12vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+}
+#divanswer23 {
+  position: absolute;
+  background-image: url("dialog.png");
+  background-size: 100% 100%;
+  width: 40%;
+  height: 20%;
+  line-height: 4vh;
+  font-size: 3vh;
+  font-style: oblique;
+  top: 50%;
+  left: 30%;
+  visibility: hidden;
+  font-weight: bolder;
+  padding-top: 4vh;
+}
+
+#teacher {
+  position: absolute;
+  width: 40%;
+  right: -5%;
+  top: 45%;
 }
