@@ -343,8 +343,8 @@ let screendata = [
     question: `${character[nowplayer].name} đến nhà Quân chơi, hãy điền nốt thông tin về bạn Quân để hoàn thành khai báo object myFriend.Gender của Quân là "male" nha ~ 
         <br>
         var myFriend = {
-            firstname: "Trần Văn",
-            lastname: "Quân"<input id='input1'/>
+            firstname: "Trần Văn",<br>
+            lastname: "Quân"<input id='input1'/><br>
             <input id='input2'/>: <input id='input3'/>
         };
         `,
