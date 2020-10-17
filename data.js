@@ -4,15 +4,22 @@ let character = [
     id: 0,
     name: "Phong",
     completed: [],
-    cimage: "",
+    cimage: "c1.png",
+    avatar: "c-1.png",
   },
   {
     id: 1,
     name: "xxx",
-    complete: [],
-    cimage: "",
+    completed: [],
+    cimage: "c3.png",
+    avatar: "c-3.png",
   },
 ];
+if (JSON.parse(localStorage.getItem("character")) == null) {
+  localStorage.setItem("character", `${JSON.stringify(character)}`);
+} else {
+  character = JSON.parse(localStorage.getItem("character"));
+}
 
 // let divanswer1 = document.getElementById("divanswer1");
 
@@ -21,12 +28,13 @@ let screendata = [
     question: `${character[nowplayer].name} vừa mua 1 cái bảng tên cho ngôi nhà, viết lên nó nào!<br> Tạo 1 biến tên houseName, gán giá trị là tên bạn cho nó.<br>var <input id='input1'/> 
     =  "<input id='input2'/>";`,
     input1: "houseName",
-    input2: "Volvo",
+    input2: `${character[nowplayer].name}`,
     tutorial: "https://www.w3schools.com/js/js_variables.asp",
     bg: "house.jpg",
     divanswer: "divanswer1",
     ins: 2,
-    answer: "Volvo",
+    answer: `Nhà của ${character[nowplayer].name}`,
+    hint: `var houseName = "${character[nowplayer].name}";`,
   },
   {
     question: `Bạn ở số nhà 50 đường CSS, biển số nhà bạn là ? <br> Tạo 1 biến tên houseAddress, gán giá trị là số nhà bạn cho nó.<br>var <input id='input1'/> 
@@ -38,6 +46,7 @@ let screendata = [
     divanswer: "divanswer2",
     ins: 2,
     answer: "50",
+    hint: `var houseAddress = 50; `,
   },
   {
     question: `Tính số tuổi của bạn, biết nó là tổng của 10 và 5? <br> Tạo 2 biến tên x và y, gán giá trị cho nó và tính tổng 2 số.<br>var <input id='input1'/> 
@@ -50,6 +59,7 @@ let screendata = [
     divanswer: "divanswer3",
     ins: 3,
     answer: "15",
+    hint: `var x =  5;<br>var y = 10;<br>document.getElementById("demo").innerHTML = x + y;`,
   },
   {
     question: `Tạo 1 biến z, gán giá trị tổng của x + y cho nó, rồi hiển thị nó trong alert box. <br>var x =  5;<br>var y = 10;<br><input id='input1'/> <input id='input2'/> = x + y;<br><input id='input3'/>('Tôi '+ z +' tuổi');`,
@@ -61,6 +71,7 @@ let screendata = [
     divanswer: "divanswer4",
     ins: 3,
     answer: "Tôi 15 tuổi",
+    hint: `var x =  5;<br>var y = 10;<br>var z = x + y;<br>alert('Tôi '+ z +' tuổi');`,
   },
   {
     question: `Trong cùng 1 dòng code, khai báo 3 biến với tên và giá trị sau:<br>firstName = "Nguyễn"<br>lastName = "${character[nowplayer].name}"<br>
@@ -75,6 +86,7 @@ let screendata = [
     divanswer: "divanswer5",
     ins: 5,
     answer: `Nguyễn ${character[nowplayer].name} - 15 tuổi`,
+    hint: `var firstName = "Nguyễn"; lastName = "Phong"; age = 15;`,
   },
   {
     question: `Sử dụng comments để mô tả kiểu dữ liệu của những biến sau:<br>
@@ -92,6 +104,12 @@ let screendata = [
     divanswer: "divanswer6",
     ins: 3,
     answer: `Rời khỏi...`,
+    hint: `var yearsOld = 15;    //<input id='input1'/><br>
+    var lastName = "${character[nowplayer].name}";    //number<br>
+    var x = {<br>
+    firstName: "Nguyễn",<br>
+  lastName: "${character[nowplayer].name}",<br>
+};    //object`,
   },
   {
     question: `Sử dụng length property để alert độ dài của tên quán cafe:<br>
@@ -105,6 +123,7 @@ let screendata = [
     ins: 1,
     answer: `10 !!`,
     dialognpc: "Tên quán của chúng tôi<br> có bao nhiêu kí tự?",
+    hint: `var x = cafeName.length;`,
   },
   {
     question: `Sử dụng kí tự phù hợp để gọi món Sinh tố 'chuối lạc'.<br>
@@ -117,6 +136,7 @@ let screendata = [
     ins: 1,
     answer: `Sinh tố 'chuối lạc'!`,
     dialognpc: "Bạn muốn uống gì?",
+    hint: `var drink = "Sinh tố 'chuối lạc'"`,
   },
   {
     question: `Gộp 2 strings để yêu cầu chi tiết hơn.<br>
@@ -132,6 +152,7 @@ let screendata = [
     ins: 3,
     answer: "Nhiều đá ít ngọt",
     dialognpc: "Bạn còn cần gì nữa không?",
+    hint: "",
   },
   {
     question: `Tìm vị trí của chữ X trong tên quán.<br>
@@ -302,7 +323,7 @@ let screendata = [
     dialognpc: `Lại là ${character[nowplayer].name} thôi à!<br> Thôi cô cho em 10 điểm luôn!?`,
   },
   {
-    question: `Cô cho bài khác dễ hơn này, 5 x 5 = mấy? (function chỉ trả về kết quả)
+    question: `Cô cho bài cuối nhé, 5 x 5 = mấy? (function chỉ trả về kết quả)
       <br>
       function myFunction() {
         <input id='input1'/> <input id='input2'/>;
@@ -317,10 +338,10 @@ let screendata = [
     divanswer: "divanswer21",
     ins: 2,
     answer: "Bằng 25 ạ",
-    dialognpc: `Cô cho bài khác dễ<br> hơn này, 5 x 5 = mấy??`,
+    dialognpc: `Cô cho bài cuối nhé,<br>5 x 5 = mấy??`,
   },
   {
-    question: `Đặt nội dung thẻ demo là lời đáp 'Vâng ạ!' của bạn với cô 
+    question: `Đặt nội dung thẻ demo là lời chào 'Tạm biệt cô!' của bạn với cô 
       <br>
       (Gợi ý: sử dụng thuộc tính innerHTML)
       <br>
@@ -334,17 +355,17 @@ let screendata = [
     bg: "school.jpg",
     divanswer: "divanswer22",
     ins: 2,
-    answer: "Vâng ạ!",
-    dialognpc: `${character[nowplayer].name} giỏi quá! Để cho<br> các bạn khác giải với nữa nhé!?`,
+    answer: "Tạm biệt cô!",
+    dialognpc: `${character[nowplayer].name} giỏi quá!<br> Hôm nay học đến đây thôi, chào các em!`,
   },
   //end of operators and function
   // objects
   {
-    question: `${character[nowplayer].name} đến nhà Quân chơi, hãy điền nốt thông tin về bạn Quân để hoàn thành khai báo object myFriend.Gender của Quân là "male" nha ~ 
+    question: `${character[nowplayer].name} đến nhà Phong chơi, hãy điền nốt thông tin về bạn Phong để hoàn thành khai báo object myFriend.Nhớ gender của Phong là "male" nha ~ 
         <br>
         var myFriend = {
-            firstname: "Trần Văn",<br>
-            lastname: "Quân"<input id='input1'/><br>
+            firstname: "Nguyễn",<br>
+            lastname: "Phong"<input id='input1'/><br>
             <input id='input2'/>: <input id='input3'/>
         };
         `,
@@ -355,8 +376,271 @@ let screendata = [
     bg: "friends-house.jpg",
     divanswer: "divanswer23",
     ins: 3,
-    answer: "Okee Quân, đi<br> chơi nào bạn hiền :U",
-    dialognpc: `Chào ${character[nowplayer].name} nha,<br> đi chơi đê bạn hiền!`,
+    answer: "Có tiếng trong nhà thằng Phong,<br> chắc nó có nhà đây :U",
+    dialognpc: `!@#$%^&&*(_+)....`,
+  },
+  {
+    question: `Gọi nó ra mở cửa nào! (Hãy gọi firstName nhé, gọi lastName Phong dỗi Phong không ra đâu :) )
+        <br>
+        var myFriend = {
+            firstName: "Phong",
+            lastName: "Nguyen",
+            gender: "con trai"
+        };
+        <br>
+        alert (<input id='input1'/>);
+        `,
+    input1: "myFriend.firstname",
+    tutorial: "https://www.w3schools.com/js/js_objects.asp",
+    bg: "friends-house.jpg",
+    divanswer: "divanswer24",
+    ins: 1,
+    answer: "Phong êiiiii!",
+    dialognpc: `!@#$%^&&*(_+)....`,
+  },
+  {
+    question: `Phong hôm nay trông phong độ quá. Hãy khen Phong xã giao một cái đi. Khen xã giao thôi mà, đừng ngại!!
+        <br>
+        var myFriend = {
+            firstName: "Phong",
+            appearance: "đẹp zai"
+        };
+        <br>
+        alert (<input id='input1'/> + ", mày hôm nay trông" + " <input id='input2'/> " + "phết nhờ!");
+        `,
+    input1: "myFriend.firstname",
+    input2: "myFriend.appearance",
+    tutorial: "https://www.w3schools.com/js/js_objects.asp",
+    bg: "friends-house.jpg",
+    divanswer: "divanswer25",
+    ins: 2,
+    answer: "Oke Phong, mày hôm nay<br> trông đẹp zai phết nhờ!",
+    dialognpc: `Ra đêi, từ từ bạn<br> eeiiii, zô nhà chơi nào`,
+  },
+  {
+    question: `Nay bố mẹ ${character[nowplayer].name} vắng nhà, ${character[nowplayer].name} phải tự đi chợ. Ngoài chợ có rất nhiều hàng, quán bán nhiều loại mặt hàng khác nhau: "quần áo", "đồ ăn vặt", "hoa quả". ${character[nowplayer].name} thấy có cửa hàng x bán quần áo. Hãy lấy giá trị "quần áo" từ mảng market và gán cho biến x
+        <br>
+        var market = ["đồ ăn vặt", "quần áo", "hoa quả"];
+        <br>
+        var x = <input id='input1'/>;
+        `,
+    input1: "market[1]",
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer26",
+    ins: 1,
+    answer: "Tiền đâu mà mua quần áo !",
+    dialognpc: `Vào xem hàng cháu ơiii`,
+  },
+  {
+    question: `Đi ngang qua một quán chè quen thuộc, ${character[nowplayer].name} chợt nhận ra hôm trước còn nợ 1 cốc chè chưa trả tiền ở đây, mà hôm nay đi từ xa bà chủ quán đã í ới. Hãy đổi giá trị đầu tiên trong mảng market thành "Mai đi cô!"
+        <br>
+        var market = ["đồ ăn vặt", "quần áo", "hoa quả"];
+        <br>
+        <input id='input1'/> = "Mai đi cô!";
+        `,
+    input1: "market[0]",
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer27",
+    ins: 1,
+    answer: "Mai đi cô!",
+    dialognpc: `A thằng ${character[nowplayer].name},<br>trả tao...`,
+  },
+  {
+    question: `Đi chợ muộn nên ngoài chợ chỉ còn vài quán mở cửa thôi. Hãy alert ra số lượng quán vẫn đang mở từ mảng open dưới đây.
+        <br>
+        var openStore = ["đồ bếp", "quần áo", "hoa quả"];
+        <br>
+        alert (<input id='input1'/> + " cô bán cố à?");
+        `,
+    input1: "openStore.length",
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer28",
+    ins: 1,
+    answer: "3 cô bán cố à?",
+    dialognpc: `Quả đi...<br>Quần áo đi...<br>Xoong chảo đê...`,
+  },
+  {
+    question: `Vào sạp bán hoa quả, ${character[nowplayer].name} chọn được vài loại quả vào giỏ, tuy nhiên, ${character[nowplayer].name} vừa nhặt nhầm một quả "táo" thối, hãy bỏ quả quả táo cuối cùng vừa bỏ vào giỏ ra, bằng cách xoá phần tử cuối cùng trong mảng fruit.
+        <br>
+        var fruits = ["nải chuối", "cam", "táo"];
+        <br>
+        <input id='input1'/>;
+        `,
+    input1: "fruits.pop()",
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer29",
+    ins: 1,
+    answer: "Táo thối này, cháu bỏ lại<br> lấy 2 quả đầu tiên thôi nhá",
+    dialognpc: `Lấy nhiều vào cháu, tươi mà<br> rẻ lắm nhá hề hề hề....`,
+  },
+  {
+    question: `${character[nowplayer].name} muốn mua thêm một quả bưởi. Hãy thêm "mít" vào vị trí cuối của mảng fruit.
+        <br>
+        var fruits = ["nải chuối", "cam"];
+        <br>
+        <input id='input1'/>;
+        `,
+    input1: 'fruits.push("mít")',
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer30",
+    ins: 1,
+    answer: "Thế lấy thêm quả mít...",
+    dialognpc: `Thôi được rồi, lấy nữa đi<br> cô giảm giá 80% cho...`,
+  },
+  {
+    question: `Sau khi chọn một hồi rất lâu, ${character[nowplayer].name} trả tiền. Tuy nhiên, ${character[nowplayer].name} đã nhận ra mình không có đủ tiền, dù rất muối mặt nhưng ${character[nowplayer].name} vẫn phải trả lại quả "cam". Hãy bỏ "cam" ra khỏi mảng fruits.
+        <br>
+        var fruits = ["nải chuối", "cam", "mít"];
+        <br>
+        fruits.splice(<input id='input1'/>,<input id='input2'/>);
+        `,
+    input1: "1",
+    input2: "1",
+    tutorial: "https://www.w3schools.com/js/js_arrays.asp",
+    bg: "market.jpg",
+    divanswer: "divanswer31",
+    ins: 2,
+    answer: "Còn có 50k,<br> thôi lại trả quả cam... :X",
+    dialognpc: `Khôn như cún,<br> thôi thì 55 nghìn...`,
+  },
+  {
+    question: `${character[nowplayer].name} rất thường xuyên vào hiệu sách, ${character[nowplayer].name} chỉ thích những sách mỏng mà rẻ, vì ${character[nowplayer].name} rất lười đọc sách (??). Hãy so sánh giá tiền của 2 quyển sách dưới đây để đưa ra màn hình kết quả true.
+        <br>
+        var 1000CachLamGiau = 200;
+        <br>
+        var 500CachTanGai = 300;
+        <br>
+        alert (500CachTanGai <input id='input1'/> 1000CachLamGiau);
+        `,
+    input1: ">",
+    tutorial: "https://www.w3schools.com/js/js_comparisons.asp",
+    bg: "bookstore.jpg",
+    divanswer: "divanswer32",
+    ins: 1,
+    answer:
+      "1000CachLamGiau có vẻ rẻ mà hay,<br> oke cho cháu quyển 500CachTanGai",
+    dialognpc: `Mua quyển nào cháu?`,
+  },
+  {
+    question: `${character[nowplayer].name} thấy có 2 quyển sách giá như nhau. Hãy so sánh giá tiền của 2 quyển sách dưới đây để đưa ra màn hình kết quả true.
+        <br>
+        var 500CachTanGai = 300;
+        <br>
+        var 555CachTanGai = 300;
+        <br>
+        alert (x <input id='input1'/> y);
+        `,
+    input1: "==",
+    tutorial: "https://www.w3schools.com/js/js_comparisons.asp",
+    bg: "bookstore.jpg",
+    divanswer: "divanswer33",
+    ins: 1,
+    answer: "Giá bằng nhau mà<br> lãi hẳn 55 cách, duyệt ",
+    dialognpc: `Còn quyển 555CachTanGai<br> cũng hay nè cháu?`,
+  },
+  {
+    question: `${character[nowplayer].name} thấy giá sale lại khác nhau, ${character[nowplayer].name} lại nghĩ lại. So sánh lại giá của 2 quyển sách dưới đây, điền 2 kí tự để đưa ra màn hình kết quả true.
+        <br>
+        var 500CachTanGai = 240;
+        <br>
+        var 555CachTanGai= 270;
+        <br>
+        alert (x <input id='input1'/> y);
+        `,
+    input1: "!=",
+    tutorial: "https://www.w3schools.com/js/js_comparisons.asp",
+    bg: "bookstore.jpg",
+    divanswer: "divanswer34",
+    ins: 1,
+    answer: "Thế thôi <br>lấy quyển 500 cho rẻ",
+    dialognpc: `500CachTanGai sale 20 % = 240k<br>555CachTanGai sale 10% = 270k nhé!`,
+  },
+  {
+    question: `${character[nowplayer].name} thích mua quyển sách làm giàu quá. Tuy nhiên, nghĩ lại phương châm của bản thân, số tiền trong ví, ${character[nowplayer].name} quyết định ko mua. Tuy nhiên ${character[nowplayer].name} chỉ mua khi giá quyển này nhỏ hơn 110.000đ. Hãy hoàn thiện câu điều kiện dưới đây.
+        <br>
+        if <input id='input1'/> x < 101 <input id='input2'/> <input id='input3'/>
+        alert ("Giảm 50% thì mua");
+        <input id='input4'/>
+        `,
+    input1: "(",
+    input2: ")",
+    input3: "{",
+    input4: "}",
+    tutorial: "https://www.w3schools.com/js/js_comparisons.asp",
+    bg: "bookstore.jpg",
+    divanswer: "divanswer35",
+    ins: 4,
+    answer: "Giảm 50% thì mua",
+    dialognpc: `Mua luôn quyển<br>1000CachLamGiau ko cháu?`,
+  },
+  {
+    question: `Ông chủ giảm cho còn 120k, ${character[nowplayer].name} đã suy nghĩ lại. Nếu chỉ trả thêm 20.000đ, thì ${character[nowplayer].name} vẫn muốn suy nghĩ thêm, vì đang cần tiền mua iPhone12, dẫn bạn gái đi chơi, ${character[nowplayer].name} muốn lấy le với bạn gái. Hãy hoàn thiện câu điều kiện dưới đây.
+        <br>
+        <input id='input1'/> ( x <input id='input2'/> 101 ) {
+            alert ("Giảm 50% thì mua");
+        } <input id='input3'/> {
+            alert ("Cũng được. Chốt!!!");
+        }
+        `,
+    input1: "if",
+    input2: "<",
+    input3: "else",
+    tutorial: "https://www.w3schools.com/js/js_comparisons.asp",
+    bg: "bookstore.jpg",
+    divanswer: "divanswer36",
+    ins: 3,
+    answer: "Cũng được. Chốt!!!",
+    dialognpc: `Giá chót 120k!!`,
+  },
+  {
+    question: `${character[nowplayer].name} hay chạy ở công viên. Công viên có đường chạy xung quanh khép kín. Mỗi lần chạy qua cổng công viên, ${character[nowplayer].name} lại chào bác bảo vệ một lần. Hãy đếm lần lượt số vòng mà ${character[nowplayer].name} chạy được từ vòng 0 đến vòng 9.
+        <br>
+        var i;<br>
+        <input id='input1'/> ( <input id='input2'/> = <input id='input3'/>; <input id='input4'/> < 10; <input id='input5'/>) {
+            console.log("Chào bác lần " + i + " nha!!");
+        }
+        `,
+    input1: "for",
+    input2: "i",
+    input3: "0",
+    input4: "i",
+    input5: "i++",
+    tutorial: "https://www.w3schools.com/js/js_loop_for.asp",
+    bg: "park.jpg",
+    divanswer: "divanswer37",
+    ins: 5,
+    answer: "Chào bác lần 10 nha!!",
+    dialognpc: `Bé mà khỏe nhỉ!!`,
+    hint: `var i;<br>
+    for ( i = 0; 0 < 10; i++) {
+        console.log("Chào bác lần " + i + " nha!!");
+    }`,
+  },
+  {
+    question: `${character[nowplayer].name} mang theo 1 chai nước 500ml khi chạy ở công viên. Trung bình sau mỗi 1 phút, ${character[nowplayer].name} lại uống hết 8ml. ${character[nowplayer].name} sẽ về nhà khi hết sạch nước. Hoàn thiện vòng while loop dưới đây để thể hiện điều đó.
+        <br>
+        var water = 500;<br>
+        <input id='input1'/> ( water > <input id='input2'/> ) {
+            water -= 8;
+        }
+        `,
+    input1: "while",
+    input2: "0",
+    tutorial: "https://www.w3schools.com/js/js_loop_while.asp",
+    bg: "park.jpg",
+    divanswer: "divanswer38",
+    ins: 2,
+    answer: "Hết xăng mỏi cẳng<br> rồi bác ơi",
+    dialognpc: `Nghỉ rồi à cháu!!`,
+    hint: `var water = 500;<br>
+    while ( water > 0 ) {
+        water -= 8;
+    }`,
   },
 ];
 
@@ -364,12 +648,10 @@ let maparea = {
   school: "operator",
   market: "object",
   house: `var`,
-  gamecenter: "event",
   cafe: "string",
   friend: "datatype, functions",
   park: "",
   bookstore: "",
-  lake: "",
 };
 
 export { character, screendata, maparea };

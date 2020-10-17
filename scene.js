@@ -1,29 +1,57 @@
-import { character, screendata, maparea } from "./data.js";
+import { screendata, maparea } from "./data.js";
+let character = JSON.parse(localStorage.getItem("character"));
 
-localStorage.setItem("nowscene", 13);
-localStorage.setItem("nowplayer", 0);
+localStorage.setItem("nowscene", 37);
+localStorage.setItem("nowplayer", 1);
 
 let scenescreen = document.getElementById("scenescreen");
 let scenecode = document.getElementById("scenecode");
 let codequestion = document.getElementById("codequestion");
 let moreinfor = document.getElementById("moreinfor");
 let next = document.getElementById("next");
+let alert = document.getElementById("alert");
+let hint = document.getElementById("hint");
+hint.addEventListener("click", showhint);
 let nowscene;
 let nowplayer;
 function changescene() {
+  alert.innerHTML = "";
   nowscene = Number(localStorage.getItem("nowscene"));
   nowplayer = Number(localStorage.getItem("nowplayer"));
-  screendata[0].input2 = character[nowplayer].name;
+  //   screendata[0].input2 = character[nowplayer].name;
 
-  screendata[0].answer = `Nhà của ${character[nowplayer].name}`;
+  //   screendata[0].answer = `Nhà của ${character[nowplayer].name}`;
   //   screendata[4].
   if (nowscene !== null) {
     scenescreen.style.backgroundImage = `url(${screendata[nowscene].bg})`;
 
-    if (nowscene >= 13 && nowscene < 23) { scenescreen.innerHTML = scenescreen.innerHTML + `<img src="teacher.png" alt="" id="teacher">`}
-      codequestion.innerHTML = `${screendata[nowscene].question}`;
+    if (nowscene >= 13 && nowscene < 22) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="teacher.png" alt="" id="teacher">`;
+    }
+    if (nowscene >= 22 && nowscene < 25) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="friend.png" alt="" id="friend">`;
+    }
+    if (nowscene == 26) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="oldwomen.png" alt="" id="oldwomen">`;
+    }
+    if (nowscene >= 28 && nowscene < 31) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="fruit.png" alt="" id="fruit">`;
+    }
+    if (nowscene >= 31 && nowscene < 37) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="oldman.png" alt="" id="oldman">`;
+    }
+    if (nowscene >= 36 && nowscene < 38) {
+      scenescreen.innerHTML =
+        scenescreen.innerHTML + `<img src="parkman.png" alt="" id="parkman">`;
+    }
+    codequestion.innerHTML = `${screendata[nowscene].question}`;
     moreinfor.innerHTML = `Tutorials : <a href="${screendata[nowscene].tutorial}">${screendata[nowscene].tutorial}</a>`;
-    let box = `<div id="${screendata[nowscene].divanswer}"></div>`;
+    let box = `<div id="${screendata[nowscene].divanswer}" class='dialogs'></div>`;
 
     scenescreen.innerHTML = scenescreen.innerHTML + `${box}`;
     if (nowscene !== 5) {
@@ -115,16 +143,18 @@ function checkanswer() {
   }
 
   if (check == true) {
+    alert.innerHTML = "";
     if (nowscene == 5) {
       document.getElementById(
         `${screendata[nowscene].divanswer}`
       ).style.visibility = "visible";
+      character[nowplayer].completed.push("house");
+      localStorage.setItem("character", `${JSON.stringify(character)}`);
       document
         .getElementById(`${screendata[nowscene].divanswer}`)
         .addEventListener("click", () => {
           location.href = "map.html";
         });
-      character[nowplayer].completed.push("house");
     }
     if (screendata[nowscene].dialognpc !== null) {
       document.getElementById(
@@ -137,6 +167,27 @@ function checkanswer() {
         console.log(nowscene);
         if (nowscene == 12) {
           character[nowplayer].completed.push("cafe");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
+          location.href = "map.html";
+        } else if (nowscene == 21) {
+          character[nowplayer].completed.push("school");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
+          location.href = "map.html";
+        } else if (nowscene == 24) {
+          character[nowplayer].completed.push("friend");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
+          location.href = "map.html";
+        } else if (nowscene == 30) {
+          character[nowplayer].completed.push("market");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
+          location.href = "map.html";
+        } else if (nowscene == 35) {
+          character[nowplayer].completed.push("bookstore");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
+          location.href = "map.html";
+        } else if (nowscene == 37) {
+          character[nowplayer].completed.push("park");
+          localStorage.setItem("character", `${JSON.stringify(character)}`);
           location.href = "map.html";
         } else {
           document.getElementById(
@@ -154,6 +205,9 @@ function checkanswer() {
       localStorage.setItem("nowscene", nowscene + 1);
       changescene();
     }
+  } else {
+    alert.style.color = "red";
+    alert.innerHTML = "Đáp án không chính xác!";
   }
 }
 
@@ -167,3 +221,7 @@ function checkanswer() {
 //     changescene();
 //   }
 // }
+function showhint() {
+  alert.style.color = "blue";
+  alert.innerHTML = screendata[nowscene].hint;
+}
